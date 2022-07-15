@@ -1,0 +1,8 @@
+{
+  "merchantInformation.merchantId" : "000000000001",
+  "merchantInformation.merchantSiteId" : "000001",
+  "clientReferenceInformation.code" : "20220316192601000",
+  "customerId" : "12345678789",
+  "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+  "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+}
