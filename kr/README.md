@@ -60,8 +60,8 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 |-----|---------|------|------------|
 |Withdrawal API|/api/ReqWithdraw.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalSeq#1.png">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalSeq#2.png">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalSeq-1.png">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalSeq-2.png">
 
 
 ## 6. Notification of Processing Result API (verseB → 제휴사)
