@@ -8,6 +8,8 @@ VERSEGEO는 검증된 게임 플랫폼 및 서비스를 기반으로 실증 사�
 
    <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/eco.png">
 
+
+## WEB 3.0 Infra
 verseB P2E API는 블록체인의 태생적 이슈와 문제점인 느린 네트워크, DAPP개발의 기능적 제한 등 인프라 구성의 접근성을 해결함과 기존 서비스 및 시스템(게임, 쇼핑, SNS등)가 블록체인에 용이하게 참여할 수 있도록 지원함을 목적으로 합니다. 
 
 <img src="http://linebuild.co.kr/assets/img/about/web30.svg">
