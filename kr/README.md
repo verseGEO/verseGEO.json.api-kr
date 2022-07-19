@@ -34,6 +34,9 @@ P2E 출금주소 검증 요청은 Game 또는 Contents 등 Metaverse 생태계 �
 |-----|---------|------|------------|
 |Withdrawal Address Verification API|/api/OutAddrVerify.json|POST|application/json|
 
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalAddressVerificationSeq.png">
+
+
 ## 4. P2E Password Registration API (제휴사 → verseB)
 
 P2E 출금을 위해서는 사용자 비밀번호 등록이 필요합니다. 제휴사는 사용자에게 비밀번호를 입력 받아 검증후 저장합니다. 또한 등록 비밀번호는 verseB에 등록 요청을 하여 제휴사에서 1회, verseB에서 2회 검증하여 진행합니다. verseB에 등록되는 비밀번호는 제휴사에서 암호화한 비밀번호를 2차 암호화(단방향)여 적용합니다.
@@ -43,6 +46,9 @@ P2E 출금을 위해서는 사용자 비밀번호 등록이 필요합니다. 제
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
 |Password Registration API|/api/RegOutPasword.json|POST|application/json|
+
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/PasswordRegistrationSeq.png">
+
 
 ## 5. P2E Withdrawal API (제휴사 → verseB)
 
@@ -54,6 +60,10 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 |-----|---------|------|------------|
 |Withdrawal API|/api/ReqWithdraw.json|POST|application/json|
 
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalSeq#1.png">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/WithdrawalSeq#2.png">
+
+
 ## 6. Notification of Processing Result API (verseB → 제휴사)
 
 처리결과 알림 API는 Exchange 요청 API와 P2E 출금 요청 API의 블록체인 처리결과를 제휴사 서버에 제공하여 블록체인의 Node 지연으로 인한 성능 저하를 방지할 수 있도록 합니다. 제휴사 Server는 Exchange 요청과 P2E 출금 요청의 해당 txid의 상태를 수신 받은 처리결과 알림으로 진행상태를 업데이트 처리합니다.
@@ -63,3 +73,5 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
 |Notification of Processing Result API|/api/Channel Request URL.json|POST|application/json|
+
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/NotificationResultSeq.png">
