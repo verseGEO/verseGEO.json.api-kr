@@ -20,7 +20,7 @@ verseB Blockchain Platform은 지속적으로 발전하고 있는 블록체인�
 ## P2E Interface
 총 7개의 API를 제공합니다. API는 성능을 고려하여 Sync 타입과 Async 타입으로 분류됩니다. 제휴사는 각 API에 해당되는 기능을 구축하여 연동처리 하게 됩니다.
 | API | 요청 | 처리 | 기능 | 비고 |
-|-----|------|------|------|------|
+|-----|--------|------|------|------|
 |Exchange Rate 조회|제휴사|verseB|Game Item 및 Point를 Play Token(내부 토큰)으로 변환하기 위한 교환 환율조회||
 |Exchange 요청|제휴사|verseB|Game Item 또는 Point를 지정된 환율에 따라 Play Token(내부 토큰)으로 전환|Async|
 |출금주소 검증 요청|제휴사|verseB|거래소 등에서 사용할 수 있는 사용자 개인이 보유한 Ethereum 주소에 대한 검증||
