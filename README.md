@@ -16,6 +16,13 @@ verseB P2E API는 블록체인의 태생적 이슈와 문제점인 느린 네트
 
 verseB Blockchain Platform은 지속적으로 발전하고 있는 블록체인과 기존 기술 및 서비스에 대한 수용과 적용을 통해 WEB3.0기반 제공과 다양한 블록체인 플랫폼 수용을 용이하게 합니다.
 
+
+## P2E Interface
+총 7개의 API를 제공합니다. API는 성능을 고려하여 Sync 타입과 Async 타입으로 분류됩니다. 제휴사는 각 API에 해당되는 기능을 구축하여 연동처리 하게 됩니다.
+| API | 요청 | 처리 | 기능 | 비고 |
+|-----|------|------|------|------|
+|Exchange Rate 조회|제휴사|Game Item 및 Point를 Play Token(내부 토큰)으로 변환하기 위한 교환 환율조회||
+
 ## 1. Exchange Rate API (제휴사 → verseB)
 
 Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 Play Token 변환 전 반드시 호출해 환율을 참조해야 합니다. Exchange Rate 조회를 통해 참조된 환율은 후속 API인 “Exchange 요청 API”에 적용되어 Play Token으로 전환 가능합니다.
