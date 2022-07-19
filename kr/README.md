@@ -21,6 +21,9 @@ Exchange Rate 조회 후 수신된 환율기준으로 Item 또는 Point를 Play 
 |-----|---------|------|------------|
 |Exchange Request API|/api/ExReq.json|POST|application/json|
 
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/ExchangeRequestSeq.png">
+
+
 ## 3. P2E Withdrawal Address Verification API (제휴사 → verseB)
 
 P2E 출금주소 검증 요청은 Game 또는 Contents 등 Metaverse 생태계 내부에서 먼 사용 가능한 Play Token을 블록체인 Public Chain에 전송하기 위해 필요한 Ethereum 주소의 정합성을 검증하는 기능입니다. P2E 출금주소 검증은 주소의 정당성 여부만 Check 합니다. 이에 따라 사용자는 P2E 출금주소를 반드시 정확히 입력해야 합니다.
