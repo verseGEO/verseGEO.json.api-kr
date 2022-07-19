@@ -3,7 +3,7 @@
 - 홈페이지 : [verseGEO.com](http://versegeo.com/).
 - 백서참조 : [verseGEO Whitepaper](http://versegeo.com/whitepaper-k.html).
 
-- 홈페이지 : <a href="http://versegeo.com" target="_new">verseGEO.com</a>
+- 홈페이지 : <a href="http://versegeo.com" target=_new>verseGEO.com</a>
 - 백서참조 : [verseGEO Whitepaper](http://versegeo.com/whitepaper-k.html).
 
 
