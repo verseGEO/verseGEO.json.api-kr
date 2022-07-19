@@ -1,6 +1,12 @@
 # verseB P2E API Guide
 
 ## Introduction
+VERSEGEO는 검증된 게임 플랫폼 및 서비스를 기반으로 실증 사용이 가능한 Token과 NFT 모델을 제공합니다. 또한 단계적으로 추가 오픈 예정인 각 게임의 세계관과 빅데이터가 통합되는 메타버스와 현실세계가 통합 가능한 디지털 생태계를 제공합니다.
+  -	VERSEGEO는 다양한 게임 및 블록체인 비즈니스를 지원합니다.
+  -	Game 또는 Contents 서비스의 포인트 또는 리워드에 대한 Tokenization을 통해 다양한 채널에서 사용 가능합니다.
+  -	NFT에 대한 발행 및 유통/판매가 가능한 내부 NFT Marketplace와 외부 NFT Marketplace를 지원합니다.
+
+
 verseB P2E API는 블록체인의 태생적 이슈와 문제점인 느린 네트워크, DAPP개발의 기능적 제한 등 인프라 구성의 접근성을 해결함과 기존 서비스 및 시스템(게임, 쇼핑, SNS등)가 블록체인에 용이하게 참여할 수 있도록 지원함을 목적으로 합니다. 
 
 <img src="http://linebuild.co.kr/assets/img/about/web30.svg">
