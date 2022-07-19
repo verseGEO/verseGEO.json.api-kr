@@ -8,6 +8,9 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
+   <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/kr/ExchangeRate.png" width="50%">
+
+
 ## 2. Exchange Request API (제휴사 → verseB)
 
 Exchange Rate 조회 후 수신된 환율기준으로 Item 또는 Point를 Play Token으로 전환 요청합니다. 이때 Play Token용 주소가 미발급 상태이면 verseB 측에서 Play Token 주소를 자동할당 하게 됩니다. 전환하게 될 Item 또는 Point는 Exchange Rate 조회에서 수신된 환율에 따라 해당 수량을 계산하여 수량이 최소 수량 이하이면 거래 불가에 대한 안내를 수행해야 합니다.
