@@ -1,5 +1,7 @@
 # verseGEO P2E API Guide
 
+## Whitepaper :  [GitHub Pages](https://pages.github.com/).
+
 ## Introduction
 verseGEO는 검증된 게임 플랫폼 및 서비스를 기반으로 실증 사용이 가능한 Token과 NFT 모델을 제공합니다. 또한 단계적으로 추가 오픈 예정인 각 게임의 세계관과 빅데이터가 통합되는 메타버스와 현실세계가 통합 가능한 디지털 생태계를 제공합니다.
   -	VERSEGEO는 다양한 게임 및 블록체인 비즈니스를 지원합니다.
