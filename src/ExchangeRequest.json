@@ -1,0 +1,11 @@
+{
+  "merchantInformation.merchantId" : "000000000001",
+  "merchantInformation.merchantSiteId" : "000001",
+  "clientReferenceInformation.code" : "20220316192601000",
+  "fromCurrency" : "GOLD",
+  "toCurrency" : "SLAYB",
+  "fromAmount" : "100", 
+  "customerId" : "12345678789",
+  "notifyUrl" : "https://versegeo.com/API/backNotify"
+  "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+}
