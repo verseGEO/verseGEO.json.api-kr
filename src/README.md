@@ -13,9 +13,9 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01REQ-01.Exchange_Rate.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01RES-01.Exchange_Rate.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01SEQ-01.Exchange_Rate.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01REQ-01.Exchange_Rate.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01RES-01.Exchange_Rate.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate.jpg">
 
 
 ## 2. Exchange Request API (제휴사 → verseGEO)
@@ -28,9 +28,9 @@ Exchange Rate 조회 후 수신된 환율기준으로 Item 또는 Point를 Play 
 |-----|---------|------|------------|
 |Exchange Request API|/api/ExReq.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/02REQ-01.Exchange.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/02RES-01.Exchange.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01SEQ-01.Exchange.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/02REQ-01.Exchange.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/02RES-01.Exchange.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange.jpg">
 
 
 ## 3. P2E Password Registration API (제휴사 → verseGEO)
@@ -43,10 +43,10 @@ P2E 출금을 위해서는 사용자 비밀번호 등록이 필요합니다. 제
 |-----|---------|------|------------|
 |Password Registration API|/api/RegOutPasword.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03REQ-01.Password_registration.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03RES-01.Password_registration.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03SEQ-01.Password_registration.jpg">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03SEQ-02.Password_change.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/03REQ-01.Password_registration.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/03RES-01.Password_registration.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/03SEQ-01.Password_registration.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/03SEQ-02.Password_change.jpg">
 
 
 ## 4. P2E Withdrawal Address Verification API (제휴사 → verseGEO)
@@ -59,10 +59,10 @@ P2E 출금주소 검증 요청은 Game 또는 Contents 등 Metaverse 생태계 �
 |-----|---------|------|------------|
 |Withdrawal Address Verification API|/api/OutAddrVerify.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04REQ-01.Withdrawal_address_verification.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04RES-01.Withdrawal_address_verification.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04SEQ-01.Withdrawal_address_verification.jpg">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04SEQ-02.Withdrawal_address_change.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04REQ-01.Withdrawal_address_verification.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04RES-01.Withdrawal_address_verification.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-01.Withdrawal_address_verification.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-02.Withdrawal_address_change.jpg">
 
 
 ## 5. P2E Withdrawal API (제휴사 → verseGEO)
@@ -75,10 +75,10 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 |-----|---------|------|------------|
 |Withdrawal API|/api/ReqWithdraw.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05REQ-01.Withdrawal.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05RES-01.Withdrawal.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05SEQ-01.Withdrawal.jpg">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05SEQ-02.Withdrawal.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05REQ-01.Withdrawal.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05RES-01.Withdrawal.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-01.Withdrawal.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-02.Withdrawal.jpg">
 
 
 ## 6. Notification of Processing Result API (verseGEO → 제휴사)
@@ -91,8 +91,8 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 |-----|---------|------|------------|
 |Notification of Processing Result API|/api/Channel Request URL.json|POST|application/json|
   
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/06REQ-01.Back-end_Notify.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/06RES-01.Back-end_Notify.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/06SEQ-01.Back-end_Notify.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06REQ-01.Back-end_Notify.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06RES-01.Back-end_Notify.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06SEQ-01.Back-end_Notify.jpg">
   
   
