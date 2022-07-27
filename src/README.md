@@ -8,7 +8,6 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
-
   <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01REQ-01.Exchange_Rate.jpg" width="80%">
   <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01RES-01.Exchange_Rate.jpg" width="80%">
   <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01SEQ-01.Exchange_Rate.jpg">
@@ -24,23 +23,12 @@ Exchange Rate 조회 후 수신된 환율기준으로 Item 또는 Point를 Play 
 |-----|---------|------|------------|
 |Exchange Request API|/api/ExReq.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/ExchangeRequestSeq.png">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/02REQ-01.Exchange.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/02RES-01.Exchange.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01SEQ-01.Exchange.jpg">
 
 
-## 3. P2E Withdrawal Address Verification API (제휴사 → verseGEO)
-
-P2E 출금주소 검증 요청은 Game 또는 Contents 등 Metaverse 생태계 내부에서 먼 사용 가능한 Play Token을 블록체인 Public Chain에 전송하기 위해 필요한 Ethereum 주소의 정합성을 검증하는 기능입니다. P2E 출금주소 검증은 주소의 정당성 여부만 Check 합니다. 이에 따라 사용자는 P2E 출금주소를 반드시 정확히 입력해야 합니다.
-
-* REST API Interface Specification
-
-| API | API URI |Method|Content-Type|
-|-----|---------|------|------------|
-|Withdrawal Address Verification API|/api/OutAddrVerify.json|POST|application/json|
-
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/WithdrawalAddressVerificationSeq.png">
-
-
-## 4. P2E Password Registration API (제휴사 → verseGEO)
+## 3. P2E Password Registration API (제휴사 → verseGEO)
 
 P2E 출금을 위해서는 사용자 비밀번호 등록이 필요합니다. 제휴사는 사용자에게 비밀번호를 입력 받아 검증후 저장합니다. 또한 등록 비밀번호는 verseGEO에 등록 요청을 하여 제휴사에서 1회, verseGEO에서 2회 검증하여 진행합니다. verseGEO에 등록되는 비밀번호는 제휴사에서 암호화한 비밀번호를 2차 암호화(단방향)여 적용합니다.
 
@@ -50,7 +38,26 @@ P2E 출금을 위해서는 사용자 비밀번호 등록이 필요합니다. 제
 |-----|---------|------|------------|
 |Password Registration API|/api/RegOutPasword.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/PasswordRegistrationSeq.png">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03REQ-01.Password_registration.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03RES-01.Password_registration.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03SEQ-01.Password_registration.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/03SEQ-02.Password_change.jpg">
+
+
+## 4. P2E Withdrawal Address Verification API (제휴사 → verseGEO)
+
+P2E 출금주소 검증 요청은 Game 또는 Contents 등 Metaverse 생태계 내부에서 먼 사용 가능한 Play Token을 블록체인 Public Chain에 전송하기 위해 필요한 Ethereum 주소의 정합성을 검증하는 기능입니다. P2E 출금주소 검증은 주소의 정당성 여부만 Check 합니다. 이에 따라 사용자는 P2E 출금주소를 반드시 정확히 입력해야 합니다.
+
+* REST API Interface Specification
+
+| API | API URI |Method|Content-Type|
+|-----|---------|------|------------|
+|Withdrawal Address Verification API|/api/OutAddrVerify.json|POST|application/json|
+
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04REQ-01.Withdrawal_address_verification.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04RES-01.Withdrawal_address_verification.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04SEQ-01.Withdrawal_address_verification.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/04SEQ-02.Withdrawal_address_change.jpg">
 
 
 ## 5. P2E Withdrawal API (제휴사 → verseGEO)
@@ -63,8 +70,10 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 |-----|---------|------|------------|
 |Withdrawal API|/api/ReqWithdraw.json|POST|application/json|
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/WithdrawalSeq-1.png">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/WithdrawalSeq-2.png">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05REQ-01.Withdrawal.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05RES-01.Withdrawal.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05SEQ-01.Withdrawal.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/05SEQ-02.Withdrawal.jpg">
 
 
 ## 6. Notification of Processing Result API (verseGEO → 제휴사)
@@ -76,5 +85,9 @@ P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
 |Notification of Processing Result API|/api/Channel Request URL.json|POST|application/json|
-
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/NotificationResultSeq.png">
+  
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/06REQ-01.Back-end_Notify.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/06RES-01.Back-end_Notify.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/06SEQ-01.Back-end_Notify.jpg">
+  
+  
