@@ -9,8 +9,8 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01REQ-01.Exchange_Rate.jpg">
-  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01RES-01.Exchange_Rate.jpg">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01REQ-01.Exchange_Rate.jpg" width="80%">
+  <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01RES-01.Exchange_Rate.jpg" width="80%">
   <img src="https://github.com/verseGEO/verseGEO.json.api/blob/main/src/01SEQ-01.Exchange_Rate.jpg">
 
 
