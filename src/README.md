@@ -1,3 +1,8 @@
+# verseGEO P2E API Guide
+
+- 홈페이지 : [verseGEO.com](http://versegeo.com/).
+- 백서참조 : [verseGEO Whitepaper](http://versegeo.com/whitepaper-k.html).
+
 ## 1. Exchange Rate API (제휴사 → verseGEO)
 
 Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 Play Token 변환 전 반드시 호출해 환율을 참조해야 합니다. Exchange Rate 조회를 통해 참조된 환율은 후속 API인 “Exchange 요청 API”에 적용되어 Play Token으로 전환 가능합니다.
