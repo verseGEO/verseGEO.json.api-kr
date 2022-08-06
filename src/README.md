@@ -13,6 +13,20 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
+| KEY |RQD|Len|Contents|Described|note|
+|-----|---|---|--------|---------|----|
+|merchantInformation.merchantId|Y|50|채널번호|MW30P에서 할당된 채널 번호||
+|merchantInformation.merchantSiteId|Y|30|채널하위번호|MW30P에서 할당된 하위채널 번호||
+|clientReferenceInformation.code|Y|20|거래번호|채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)||
+|fromCurrency|Y|10|요청단위|전환 요청 통화코드(Item, Token 등)||
+|toCurrency|Y|10|전환단위|전환 대상 통화코드(Item, Token 등)||
+|fromAmount|Y|20|요청수량|Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)||
+|sign|Y|64|서명검증 값|보안 서명 (“2. 보안적용 Guide” 참조)||
+
+
+
+
+
   <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01REQ-01.Exchange_Rate.jpg" width="80%">
   <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01RES-01.Exchange_Rate.jpg" width="80%">
   <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate.jpg">
