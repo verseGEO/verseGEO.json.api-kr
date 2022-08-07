@@ -13,7 +13,7 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
-| KEY |RQD|Len|Contents|Described|note|
+| KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:|----------|---------|----|
 |merchantInformation.merchantId|Y|50|채널번호|MW30P에서 할당된 채널 번호|Respond the same as the requested value|
 |merchantInformation.merchantSiteId|Y|30|채널하위번호|MW30P에서 할당된 하위채널 번호|Respond the same as the requested value|
