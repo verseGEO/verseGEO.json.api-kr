@@ -15,19 +15,13 @@ Exchange Rate 조회 API는 게임 또는 서비스의 Item, Point등에 대한 
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:|----------|---------|----|
-|<sub>merchantInformation.merchantId</sub>|Y|50|채널번호|MW30P에서 할당된 채널 번호|Respond the same as the requested value|
-|merchantInformation.merchantSiteId|Y|30|채널하위번호|MW30P에서 할당된 하위채널 번호|Respond the same as the requested value|
-|clientReferenceInformation.code|Y|20|거래번호|채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)|Respond the same as the requested value|
-|fromCurrency|Y|10|요청단위|전환 요청 통화코드(Item, Token 등)|GOLD|
-|toCurrency|Y|10|전환단위|전환 대상 통화코드(Item, Token 등)|SLAYB|
-|fromAmount|Y|20|요청수량|Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)|100|
-|toAmount|N|20|전환수량|전환수량 = 요청수량 * 환율|1|
-|exchangeRate|N|20|환율|Exchange Rate Inquiry API에서 수신 받은 환율 사용|10%|
-|status|Y|10|처리결과|성공(SUCCSS), 실패(DECLINED)|SUCCESS, DECLINED|
-|errorInformation.errCd|N|8|오류코드|성공일 경우 NULL, 오류일 경우 코드 확인|See Error Code|
-|errorInformation.reason|N|192|오류메시지|오류 발생시 해당 오류 메시지 |See Error Code|
-|sign|Y|64|서명검증 값|보안 서명 (“2. 보안적용 Guide” 참조)||
-
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>0000000000013</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>000001</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>20220316192601001</sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>전환 요청 통화코드(Item, Token 등)</sub>|<sub>GOLD</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
 
   <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01REQ-01.Exchange_Rate.jpg" width="80%">
   <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01RES-01.Exchange_Rate.jpg" width="80%">
