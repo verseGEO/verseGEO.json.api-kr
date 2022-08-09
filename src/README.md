@@ -370,11 +370,11 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-01.Withdrawal_Address-KR.jpg">
 <br>
 
-* Withdrawal Address Sequence(Registration)
+* Withdrawal Address Sequence(Change)
 <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-02.Withdrawal_Address-KR.jpg">
 <br>
 
-* Passport Interface JSON Sample
+* Withdrawal Address Interface JSON Sample
    
 [Request]
 ```json
@@ -385,7 +385,6 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
     "customerId" : "userid@usermail.url",
     "outPassword" : "f3a0ea7f63724bbd18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6",
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
-
    }
 ```
 
@@ -422,32 +421,334 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 ## 5. Withdrawal 
 ### 5.1 Withdrawal pre-trade API (Partners → ME30P)
 
-P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입니다. 외부 이더리움 주소 전송된 P2E Token은 거래소 등 다양한 분야에 자유롭게 사용 가능합니다.
+Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행해야 합니다.  Withdrawal pre-trade API의 결과 중 주요 데이터는 인출 본거래인 Withdrawal API 반영되어야 합니다. (Related (required field) API flow 가이드문서 참조-)
 
 * REST API Interface Specification
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Withdrawal API|/api/ReqWithdraw.json|POST|application/json|
+|Withdrawal pre-trade API|/api/Reqpretrade.json|POST|application/json|
+<br>
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05REQ-01.Withdrawal.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05RES-01.Withdrawal.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-01.Withdrawal.jpg">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-02.Withdrawal.jpg">
+* Withdrawal pre-trade Request Interface Layout
 
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>000000000001</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>000001</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>20220316192601001</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>인출 요청 통화코드</sub>|<sub>SLAYB</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>인출 대상 통화코드</sub>|<sub>VGEO</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>인출 요청 토큰 수량</sub>|<sub>1</sub>|
+|<sub>sign</sub>|<sub></sub>|<sub></sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
 
-## 6. Notification of Processing Result API (verseGEO → 제휴사)
+* Withdrawal pre-trade Response Interface Layout
 
-처리결과 알림 API는 Exchange 요청 API와 P2E 출금 요청 API의 블록체인 처리결과를 제휴사 서버에 제공하여 블록체인의 Node 지연으로 인한 성능 저하를 방지할 수 있도록 합니다. 제휴사 Server는 Exchange 요청과 P2E 출금 요청의 해당 txid의 상태를 수신 받은 처리결과 알림으로 진행상태를 업데이트 처리합니다.
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>인출 요청 통화코드</sub>|<sub>SLAYB</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>인출 대상 통화코드</sub>|<sub>VGEO</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>인출 요청 토큰 수량</sub>|<sub>1</sub>|
+|<sub>withdrawalRate</sub>|<sub>N</sub>|<sub>20</sub>|<sub>인출환율</sub>|<sub>인출 환율</sub>|<sub>100%</sub>|
+|<sub>toAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>전환수량</sub>|<sub>전환수량 = 요청수량 * 인출환율</sub>|<sub>1</sub>|
+|<sub>withdrawalFee</sub>|<sub>N</sub>|<sub>20</sub>|<sub>인출수수료</sub>|<sub>인출 수수료</sub>|<sub>0</sub>|
+|<sub>withdrawalAmount</sub>|<sub>N</sub>|<sub>20</sub>|<sub>인출수량</sub>|<sub>인출수량 = 전환수량 - 인출 수수료</sub>|<sub>1</sub>|
+|<sub>ReserveWID</sub>|<sub>N</sub>|<sub>192</sub>|<sub>인출검증 WID</sub>|<sub>인출거래 수행을 위한 거래검증 WID</sub>|<sub></sub>|
+|<sub>pinNumber</sub>|<sub>N</sub>|<sub>6</sub>|<sub>인출 PIN NUMBER</sub>|<sub>Withdrawal 본거래에서 사용한 Pin Number</sub>|<sub>854021</sub>|
+|<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
+|<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
+|<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Withdrawal pre-trade Sequence
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-01.Withdrawal-KR.jpg">
+<br>
+
+* Withdrawal pre-trade Interface JSON Sample
+   
+[Request]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outPassword" : "f3a0ea7f63724bbd18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6",
+    "fromCurrency" : "SLAYB",
+    "toCurrency" : "VEGO",
+    "fromAmount" : "1", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : SUCCESS]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "fromCurrency" : "SLAYB",
+    "toCurrency" : "VEGO",
+    "fromAmount" : "1", 
+    "withdrawalRate" : “100%”,
+    "toAmount" : “1”,
+    "withdrawalFee" : “0”,
+    "withdrawalAmount" : “1”,
+    "ReserveWID" : “d18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6f3a0ea7f63724bb”,
+    "pinNumber" : “880154”,
+    "status" : "SUCCESS", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : DECLINED]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "fromCurrency" : "SLAYB",
+    "toCurrency" : "VEGO",
+    "fromAmount" : "1", 
+    "status" : "DECLINED",
+    "errorInformation.errCd" : "B011",
+    "errorInformation.reason" : "비밀번호 검증 오류",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+<br>
+<br>
+
+### 5.2 Withdrawal API (Partners → ME30P)
+
+인출은 PlayToken을 외부주소로 전송하는 기능입니다. 외부주소 전송된 PlayToken은 거래소 등 다양한 분야에 자유롭게 사용 가능합니다.
 
 * REST API Interface Specification
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Notification of Processing Result API|/api/Channel Request URL.json|POST|application/json|
-  
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06REQ-01.Back-end_Notify.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06RES-01.Back-end_Notify.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06SEQ-01.Back-end_Notify.jpg">
-  
-  
+|Withdrawal pre-trade API|/api/Withdrawal.json|POST|application/json|
+<br>
+
+* Withdrawal Request Interface Layout
+
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>000000000001</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>000001</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>20220316192601001</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 fromCurrency 값</sub>|<sub>SLAYB</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 toCurrency 값</sub>|<sub>VGEO</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 fromAmount 값</sub>|<sub>1</sub>|
+|<sub>withdrawalRate</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출환율</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 withdrawalRate 값</sub>|<sub>100%</sub>|
+|<sub>toAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>전환수량</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 toAmount 값</sub>|<sub>1</sub>|
+|<sub>withdrawalFee</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출수수료</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 withdrawalFee 값</sub>|<sub>0</sub>|
+|<sub>withdrawalAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출수량</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 withdrawalAmount 값</sub>|<sub>1</sub>|
+|<sub>ReserveWID</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>인출검증 WID</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 ReserveWID 값</sub>|<sub></sub>|
+|<sub>pinNumber</sub>|<sub>Y</sub>|<sub>6</sub>|<sub>인출 PIN NUMBER</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 pinNumber 값</sub>|<sub>854021</sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>Papers</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 호출 후 수신 받은 거래 검증 KEY</sub>|<sub></sub>|
+|<sub>notifyUrl</sub>|<sub>N</sub>|<sub>128</sub>|<sub>처리결과 수신 URL</sub>|<sub>비동기 처리결과를 수신 받을 URL (채널 측에서 블록체인 처리결과를 수신 처리하도록 개발 필요함)</sub>|<sub>https://Partners_URL/API/backNotify</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Withdrawal Response Interface Layout
+
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>인출 요청 통화코드</sub>|<sub>SLAYB</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>인출 대상 통화코드</sub>|<sub>VGEO</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>인출 요청 토큰 수량</sub>|<sub>1</sub>|
+|<sub>withdrawalRate</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출환율</sub>|<sub>인출 환율</sub>|<sub>100%</sub>|
+|<sub>toAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>전환수량</sub>|<sub>전환수량 = 요청수량 * 인출환율</sub>|<sub>1</sub>|
+|<sub>withdrawalFee</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출수수료</sub>|<sub>인출 수수료</sub>|<sub>0</sub>|
+|<sub>withdrawalAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출수량</sub>|<sub>인출수량 = 전환수량 - 인출 수수료</sub>|<sub>1</sub>|
+|<sub>txId</sub>|<sub>N</sub>|<sub>128</sub>|<sub>TXID</sub>|<sub>블록체인 Transaction ID</sub>|<sub></sub>|
+|<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
+|<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
+|<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Withdrawal Sequence
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-01.Withdrawal-KR.jpg">
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/05SEQ-02.Withdrawal-KR.jpg">
+<br>
+
+* Withdrawal Interface JSON Sample
+   
+[Request]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "fromCurrency" : "SLAYB",
+    "toCurrency" : "VEGO",
+    "fromAmount" : "1", 
+    "withdrawalRate" : “100%”,
+    "toAmount" : “1”,
+    "withdrawalFee" : “0”,
+    "withdrawalAmount" : “1”,
+    "ReserveWID" : “d18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6f3a0ea7f63724bb”,
+    "pinNumber" : “880154”,
+    “Papers" : "77974df0c8be6a58264ec2df860af3a0ea7f63724bbd18194bf3ad636b31fac6",
+    "notifyUrl" : "https://Partners_URL /API/backNotify"
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : SUCCESS]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "fromCurrency" : "SLAYB",
+    "toCurrency" : "VEGO",
+    "fromAmount" : "1", 
+    "withdrawalRate" : “100%”,
+    "toAmount" : “1”,
+    "withdrawalFee" : “0”,
+    "withdrawalAmount" : “1”,
+    "txId" : "0x7104afd5b61c5df952c8e9afd2dafa222d543111b2ee3862c80502b3f2aed93b ",
+    "status" : "SUCCESS", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : DECLINED]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "fromCurrency" : "SLAYB",
+    "toCurrency" : "VEGO",
+    "fromAmount" : "1", 
+    "toAmount" : "",
+    "exchangeRate" : "",
+    "txId" : "",
+    "status" : "DECLINED",
+    "errorInformation.errCd" : "B011",
+    "errorInformation.reason" : "비밀번호 검증 오류",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+<br>
+<br>
+
+
+## 6. Block Notify API (MW30P → Partners)
+
+Block Notify API는 Exchange API, Withdrawal API 등 블록체인 트랜잭션관련 주요 거래에 대한 효율을 고려하여 비동기 방식으로 트랜잭션 처리결과(Block Confirm 여부)를 통보합니다. 
+
+* REST API Interface Specification
+
+| API | API URI |Method|Content-Type|
+|-----|---------|------|------------|
+|Block Notify API|/api/Partners_URL|POST|application/json|
+<br>
+
+* Block Notify Request Interface Layout
+
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|    
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>netDivision</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>네트워크 구분</sub>|<sub>블록체인 네트워크 구분</sub>|<sub>SLAYB, VGEO</sub>|
+|<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>내부주소(Exchange API) 또는 외부주소(Withdrawal API)</sub>|<sub></sub>|
+|<sub>txId</sub>|<sub>N</sub>|<sub>128</sub>|<sub>TXID</sub>|<sub>블록체인 Transaction ID</sub>|<sub></sub>|
+|<sub>status</sub>|<sub>Y</sub>|<sub>32</sub>|<sub>TXID 상태</sub>|<sub>블록체인 Transaction 상태</sub>|<sub>confirm</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Block Notify Request Interface Layout
+
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|    
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
+|<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
+|<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Block Notify Sequence
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/06SEQ-01.Block_notify-KR.jpg">
+<br>
+
+* Block Notify Interface JSON Sample
+   
+[Request]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "netDivision" : "SLAY",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "txid" : "0x7104afd5b61c5df952c8e9afd2dafa222d543111b2ee3862c80502b3f2aed93b",
+    "status" : "confirm",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : SUCCESS]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "status" : "SUCCESS", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : DECLINED]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "status" : "DECLINED",
+    "errorInformation.errCd" : "XXXX",
+    "errorInformation.reason" : "오류메시지",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+<br>
+<br>
