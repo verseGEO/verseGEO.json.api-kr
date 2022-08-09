@@ -261,12 +261,14 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
 <br>
 
+* Passport Required Option (PassportOption)
 
-|     |Register<br>Request|Register<br>Response|Certify<br>Request|Certify<br>Response|Change<br>Request|Change<br>Response|
-|-----|-------|--------|-------|-------|-------|-------|
-|outPassword|N||Y||Y||
-|newPassword|Y||N||Y||
-|Papers|N|Y|N|Y|Y|Y|
+|KEY|Register<br>Request|Register<br>Response|Certify<br>Request|Certify<br>Response|Change<br>Request|Change<br>Response|
+|:-----|:----:|:----:|:----:|:----:|:----:|:----:|
+|outPassword|N|-|Y|-|Y|-|
+|newPassword|Y|-|N|-|Y|-|
+|Papers     |N|Y|N|Y|Y|Y|
+<br>
 
 * Passport Sequence(Password Registration)
 
