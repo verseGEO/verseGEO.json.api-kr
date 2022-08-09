@@ -46,10 +46,8 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate_Inquiry-KR.jpg">
 
 * Exchange Rate Inquiry Interface JSON Sample
-```ruby
-   puts "Hello World"
-```
-```{
+```json
+   {
   "merchantInformation.merchantId" : "000000000001",
   "merchantInformation.merchantSiteId" : "000001",
   "clientReferenceInformation.code" : "20220316192601000",
@@ -57,8 +55,8 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
   "toCurrency" : "SLAYB",
   "fromAmount" : "100", 
   "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
-```}
-
+   }
+```
 
 ## 2. Exchange Request API (제휴사 → verseGEO)
 
