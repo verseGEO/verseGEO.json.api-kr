@@ -24,7 +24,7 @@ Metaverse WEB 3.0 Platform은 지속적으로 발전하고 있는 블록체인�
 API는 성능을 고려하여 Sync 타입과 Async 타입으로 분류됩니다. 제휴사는 각 API에 해당되는 기능을 적용하며 JSON, C/C++, JAVA등 다양한 개발언어를 지원합니다.
 
 | API | 요청 | 처리 | 기능 | 비고 |
-|-----|--------|--------|------|------|
+|----------------------------|--------|--------|------|------|
 |Exchange Rate Inquiry|Partners|MW30P|Item/Point/etc to PlayToken 환율 조회<br>PlayToken to Item/Point/etc 환율 조회<br>(파트너사가 사용자에게 제공하는 각종 혜택 등)||
 |Exchange |Partners|MW30P|Item/Point/etc to PlayToken 전환<br>PlayToken to Item/Point/etc 전환|Async|
 |Passport|Partners|MW30P|주요 API 실행을 위한 인증 서비스||
