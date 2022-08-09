@@ -13,7 +13,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Exchange Rate API|/api/ExRate.json|POST|application/json|
+|Exchange Rate API|/api/ExchangeRate.json|POST|application/json|
 <br>
 
 * Exchange Rate Inquiry Request Interface Layout
