@@ -26,7 +26,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
 |<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
-<p>
+<br>
    
 * Exchange Rate Inquiry Response Interface Layout
 
