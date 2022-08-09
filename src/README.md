@@ -3,7 +3,7 @@
 - 홈페이지 : [verseGEO.com](http://versegeo.com/).
 - 백서참조 : [verseGEO Whitepaper](http://versegeo.com/whitepaper-k.html).
 
-## 1. Exchange Rate API (Partners → MW30P)
+## 1. Exchange Rate Inquiry API (Partners → MW30P)
 
 Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc  PlayToken, PlayToken  Item, Point, etc). 이 API를 통해 Exchange API에 환율정보를 적용해야 합니다.
 
@@ -214,6 +214,8 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
    }
 ```
+<br>
+<br>
 
 ## 3. Passport API (Partners → MW30P)
 
@@ -260,10 +262,11 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 <br>
 
 
-| Key |Register|Certify|Change|
-|     |Request|Response|Request|Response|Request|Response|
+|     |Register<br>Request|Register<br>Response|Certify<br>Request|Certify<br>Response|Change<br>Request|Change<br>Response|
 |-----|-------|--------|-------|-------|-------|-------|
-|outPassword|N||Y|Y|
+|outPassword|N||Y||Y||
+|newPassword|Y||N||Y||
+|Papers|N|Y|N|Y|Y|Y|
 
 * Passport Sequence(Password Registration)
 
