@@ -99,8 +99,10 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
    }
 ```
+<br>
+<br>
 
-## 2. Exchange Request API (Partners → verseGEO)
+## 2. Exchange API (Partners → verseGEO)
 
 제휴사의 사용자가 보유한 요청단위(아이템, 포인트, 토큰 등)에 대해 전환단위(아이템, 포인트, 토큰 등)로 변환합니다. Exchange 요청을 위해서는 Exchange Rate Inquiry API를 통해 환율정보를 적용해야 합니다.
 
