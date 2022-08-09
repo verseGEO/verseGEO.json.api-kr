@@ -13,7 +13,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Exchange Rate API|/api/ExchangeRate.json|POST|application/json|
+|Exchange Rate Inquiry API|/api/ExchangeRate.json|POST|application/json|
 <br>
 
 * Exchange Rate Inquiry Request Interface Layout
@@ -110,7 +110,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Exchange Request API|/api/ExchangeRequest.json|POST|application/json|
+|Exchange API|/api/ExchangeRequest.json|POST|application/json|
 <br>
 
 * Exchange Request Interface Layout
@@ -227,7 +227,7 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Password Registration API|/api/PasswordRegistration.json|POST|application/json|
+|Passport API|/api/PasswordRegistration.json|POST|application/json|
 <br>
 
 * Passpoort Request Interface Layout
@@ -324,21 +324,100 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 <br>
 <br>
 
-## 4. P2E Withdrawal Address Verification API (제휴사 → verseGEO)
+## 4. Withdrawal Address API (Partners → MW30P)
 
-P2E 출금주소 검증 요청은 Game 또는 Contents 등 Metaverse 생태계 내부에서 먼 사용 가능한 Play Token을 블록체인 Public Chain에 전송하기 위해 필요한 Ethereum 주소의 정합성을 검증하는 기능입니다. P2E 출금주소 검증은 주소의 정당성 여부만 Check 합니다. 이에 따라 사용자는 P2E 출금주소를 반드시 정확히 입력해야 합니다.
+파트너사의 사용자가 보유한 PlayToken(내부토큰)을 외부에서 사용할 수 있도록 외부주소(거래소 등에서 사용 가능한)를 정상여부 검증 및 등록을 수행합니다. 외부주소를 사용자가 정확히 입력하지 않아 발생하는 손실은 사용자에게 있습니다.
+
+※ 현재는 이더리움 기반의 블록체인만 지원하고 있으나 파트너사 및 사업 제휴 모델에 따라 다양한 블록체인 모델로 확장 가능합니다.
 
 * REST API Interface Specification
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Withdrawal Address Verification API|/api/OutAddrVerify.json|POST|application/json|
+|Withdrawal Address API|/api/WithdrawalAddressVerification.json|POST|application/json|
+<br>
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04REQ-01.Withdrawal_address_verification.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04RES-01.Withdrawal_address_verification.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-01.Withdrawal_address_verification.jpg">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-02.Withdrawal_address_change.jpg">
+* Withdrawal Address Request Interface Layout
 
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>000000000001</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>000001</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>20220316192601001</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>Papers</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 인증 후 수신된 Papers</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Withdrawal Address Response Interface Layout
+
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>outAddress</sub>|<sub>N</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
+|<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub></sub>|
+|<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
+|<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Withdrawal Address Sequence(Registration)
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-01.Withdrawal_Address-KR.jpgg">
+<br>
+
+* Withdrawal Address Sequence(Registration)
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-02.Withdrawal_Address-KR.jpgg">
+<br>
+
+* Passport Interface JSON Sample
+   
+[Request]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outPassword" : "f3a0ea7f63724bbd18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+
+   }
+```
+
+[Response : SUCCESS]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xcce4726a8bca553e31c5341fa456a43062b46520",
+    "status" : "SUCCESS", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : DECLINED]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "customerId" : "userid@usermail.url",
+    "outAddress" : "0xb440a6cdfbfe4870fc06385d0533476344bdc557",
+    "status" : "DECLINED",
+    "errorInformation.errCd" : "B100",
+    "errorInformation.reason" : " 지갑 주소가 올바르지 않습니다",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+<br>
+<br>
 
 ## 5. P2E Withdrawal API (제휴사 → verseGEO)
 
