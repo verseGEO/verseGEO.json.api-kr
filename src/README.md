@@ -100,20 +100,118 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
    }
 ```
 
-## 2. Exchange Request API (제휴사 → verseGEO)
+## 2. Exchange Request API (Partners → verseGEO)
 
-Exchange Rate 조회 후 수신된 환율기준으로 Item 또는 Point를 Play Token으로 전환 요청합니다. 이때 Play Token용 주소가 미발급 상태이면 verseGEO 측에서 Play Token 주소를 자동할당 하게 됩니다. 전환하게 될 Item 또는 Point는 Exchange Rate 조회에서 수신된 환율에 따라 해당 수량을 계산하여 수량이 최소 수량 이하이면 거래 불가에 대한 안내를 수행해야 합니다.
+제휴사의 사용자가 보유한 요청단위(아이템, 포인트, 토큰 등)에 대해 전환단위(아이템, 포인트, 토큰 등)로 변환합니다. Exchange 요청을 위해서는 Exchange Rate Inquiry API를 통해 환율정보를 적용해야 합니다.
 
 * REST API Interface Specification
 
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
-|Exchange Request API|/api/ExReq.json|POST|application/json|
+|Exchange Request API|/api/ExchangeRequest.json|POST|application/json|
+<br>
 
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/02REQ-01.Exchange.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/02RES-01.Exchange.jpg" width="80%">
-  <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange.jpg">
+* Exchange Request Interface Layout
 
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>000000000001</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>000001</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>20220316192601001</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY). 사용자의 디바이스(모바일, PC 등)의 분실 또는 파손 등으로 변경이 발생해도 사용자의 자산을 관리가 가능하도록 사용자 고유 Key가 반드시 필요함.</sub>|<sub>userid@usermail.url</sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>전환 요청 통화코드(Item, Token 등)</sub>|<sub>GOLD</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
+|<sub>exchangeRate</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>환율</sub>|<sub>Exchange Rate Inquiry API에서 수신 받은 환율 사용</sub>|<sub>10%</sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>Papers</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 호출 후 수신 받은  거래검증 KEY</sub>|<sub></sub>|
+|<sub>notifyUrl</sub>|<sub>N</sub>|<sub>128</sub>|<sub>처리결과 수신 URL</sub>|<sub>비동기 처리결과를 수신 받을 URL (채널 측에서 블록체인 처리결과를 수신 처리하도록 개발 필요함)</sub>|<sub>https://Partners_URL/API/backNotify</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Exchange Response Interface Layout
+
+| KEY |RQD|Len| Contents |Described|note|
+|-----|:-:|:-:| -------- |---------|----|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
+|<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>전환 요청 통화코드(Item, Token 등)</sub>|<sub>GOLD</sub>|
+|<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
+|<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
+|<sub>toAmount</sub>|<sub>N</sub>|<sub>20</sub>|<sub>전환수량</sub>|<sub>전환수량 = 요청수량 * 환율</sub>|<sub>1</sub>|
+|<sub>exchangeRate</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>환율</sub>|<sub>Exchange Rate Inquiry API에서 수신 받은 환율 사용</sub>|<sub>10%</sub>|
+|<sub>internalAddress</sub>|<sub>N</sub>|<sub>128</sub>|<sub>내부주소</sub>|<sub>PlayToken(Internal Token) Address</sub>|<sub></sub>|
+|<sub>txId</sub>|<sub>N</sub>|<sub>128</sub>|<sub>TXID</sub>|<sub>블록체인 Transaction ID</sub>|<sub></sub>|
+|<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
+|<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
+|<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+<br>
+
+* Exchange Sequence
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/02SEQ-01.Exchange-KR.jpg">
+<br>
+
+* Exchange Rate Inquiry Interface JSON Sample
+   
+[Request]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "fromCurrency" : "GOLD",
+    "toCurrency" : "SLAYB",
+    "fromAmount" : "100", 
+    "customerId" : "userid@usermail.url",
+    "outPassword" : "f3a0ea7f63724bbd18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6",
+    "Papers" : "77974df0c8be6a58264ec2df860af3a0ea7f63724bbd18194bf3ad636b31fac6",
+    "notifyUrl" : "https://Partners_URL/API/backNotify"
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : SUCCESS]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "fromCurrency" : "GOLD",
+    "toCurrency" : "SLAYB",
+    "fromAmount" : "100", 
+    "toAmount" : "1",
+    "exchangeRate" : "10%",
+    "internalAddress" : "0xb440a6cdfbfe4870fc06385d0533476344bdc557",
+    "customerId" : "userid@usermail.url",
+    "txId" : "0x7104afd5b61c5df952c8e9afd2dafa222d543111b2ee3862c80502b3f2aed93b ",
+    "status" : "SUCCESS", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : DECLINED]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "fromCurrency" : "GOLD",
+    "toCurrency" : "SLAYB",
+    "fromAmount" : "99", 
+    "toAmount" : "",
+    "exchangeRate" : "13%",
+    "internalAddress" : "0xb440a6cdfbfe4870fc06385d0533476344bdc557",
+    "customerId" : "userid@usermail.url",
+    "txId" : "",
+    "status" : "DECLINED",
+    "errorInformation.errCd" : "7010",
+    "errorInformation.reason" : "금액 검증 오류",
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
 
 ## 3. P2E Password Registration API (제휴사 → verseGEO)
 
