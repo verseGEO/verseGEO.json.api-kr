@@ -14,6 +14,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 | API | API URI |Method|Content-Type|
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
+<br>
 
 * Exchange Rate Inquiry Request Interface Layout
 
@@ -44,10 +45,11 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
-<p>
+<br>
    
 * Exchange Rate Inquiry Sequence
 <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate_Inquiry-KR.jpg">
+<br>
 
 * Exchange Rate Inquiry Interface JSON Sample
    
@@ -60,6 +62,40 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
     "fromCurrency" : "GOLD",
     "toCurrency" : "SLAYB",
     "fromAmount" : "100", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : SUCCESS]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "fromCurrency" : "GOLD",
+    "toCurrency" : "SLAYB",
+    "fromAmount" : "100", 
+    "toAmount" : "1",
+    "exchangeRate" : "10%",
+    "status" : "SUCCESS", 
+    "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+   }
+```
+
+[Response : DECLINED]
+```json
+   {
+    "merchantInformation.merchantId" : "000000000001",
+    "merchantInformation.merchantSiteId" : "000001",
+    "clientReferenceInformation.code" : "20220316192601000",
+    "fromCurrency" : "GOLD",
+    "toCurrency" : "SLAYB",
+    "fromAmount" : "99", 
+    "toAmount" : "",
+    "exchangeRate" : "",
+    "status" : "DECLINED", 
+    "errorInformation.errCd" : "7007",
+    "errorInformation.reason" : " 최소 금액 부족",
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
    }
 ```
