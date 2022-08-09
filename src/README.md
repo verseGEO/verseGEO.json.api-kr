@@ -367,11 +367,11 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 <br>
 
 * Withdrawal Address Sequence(Registration)
-<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-01.Withdrawal_Address-KR.jpgg">
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-01.Withdrawal_Address-KR.jpg">
 <br>
 
 * Withdrawal Address Sequence(Registration)
-<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-02.Withdrawal_Address-KR.jpgg">
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/04SEQ-02.Withdrawal_Address-KR.jpg">
 <br>
 
 * Passport Interface JSON Sample
