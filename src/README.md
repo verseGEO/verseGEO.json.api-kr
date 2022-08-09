@@ -1,4 +1,4 @@
-# verseGEO P2E API Guide
+# MW30P P2E API Guide
 
 - 홈페이지 : [verseGEO.com](http://versegeo.com/).
 - 백서참조 : [verseGEO Whitepaper](http://versegeo.com/whitepaper-k.html).
@@ -419,7 +419,8 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 <br>
 <br>
 
-## 5. P2E Withdrawal API (제휴사 → verseGEO)
+## 5. Withdrawal 
+### 5.1 Withdrawal pre-trade API (Partners → ME30P)
 
 P2E 출금은 Play Token을 외부 이더리움 주소로 전송하는 기능입니다. 외부 이더리움 주소 전송된 P2E Token은 거래소 등 다양한 분야에 자유롭게 사용 가능합니다.
 
