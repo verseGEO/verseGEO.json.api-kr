@@ -16,6 +16,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
 * Exchange Rate Inquiry Request Interface Layout
+
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
 |<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>0000000000013</sub>|
@@ -27,6 +28,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
 
 * Exchange Rate Inquiry Response Interface Layout
+
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
 |<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
