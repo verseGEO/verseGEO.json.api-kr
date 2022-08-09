@@ -42,7 +42,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
 
-<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate.jpg">
+<img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate_Inquiry-KR.jpg">
 
 
 ## 2. Exchange Request API (제휴사 → verseGEO)
