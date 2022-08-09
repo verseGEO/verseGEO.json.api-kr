@@ -33,9 +33,9 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>전환 요청 통화코드(Item, Token 등)</sub>|<sub>GOLD</sub>|
 |<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
 |<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
