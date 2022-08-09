@@ -26,7 +26,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>전환 요청 통화코드(Item, Token 등)</sub>|<sub>GOLD</sub>|
 |<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
 |<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
    
 * Exchange Rate Inquiry Response Interface Layout
@@ -44,7 +44,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
    
 * Exchange Rate Inquiry Sequence
@@ -125,19 +125,19 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
 |<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
 |<sub>exchangeRate</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>환율</sub>|<sub>Exchange Rate Inquiry API에서 수신 받은 환율 사용</sub>|<sub>10%</sub>|
-|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, "2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 |<sub>Papers</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 호출 후 수신 받은  거래검증 KEY</sub>|<sub></sub>|
-|<sub>notifyUrl</sub>|<sub>N</sub>|<sub>128</sub>|<sub>처리결과 수신 URL</sub>|<sub>비동기 처리결과를 수신 받을 URL (채널 측에서 블록체인 처리결과를 수신 처리하도록 개발 필요함)</sub>|<sub>https://Partners_URL/API/backNotify</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>notifyUrl</sub>|<sub>N</sub>|<sub>128</sub>|<sub>처리결과 수신 URL</sub>|<sub>비동기 처리결과를 수신 받을 URL (채널 측에서 블록체인 처리결과를 수신 처리하도록 개발 필요함)</sub>|<sub>Partners_URL<br>(Only HTTPS)</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Exchange Response Interface Layout
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>전환 요청 통화코드(Item, Token 등)</sub>|<sub>GOLD</sub>|
 |<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>전환 대상 통화코드(Item, Token 등)</sub>|<sub>SLAYB</sub>|
@@ -149,7 +149,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Exchange Sequence
@@ -240,25 +240,25 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>outAddress </sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>사용 안함</sub>|<sub></sub>|
 |<sub>PassportOption</sub>|<sub>Y</sub>|<sub>32</sub>|<sub>비밀번호 Option</sub>|<sub>비밀번호 처리 옵셥(Register : 최초등록 시, Certify : 비밀번호 검증 시, Change : 비밀번호 변경 시)</sub>|<sub></sub>|
-|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
-|<sub>newPassword</sub>|<sub>N</sub>|<sub>192</sub>|<sub>신규 비밀번호(암호화)</sub>|<sub>비밀번호 최초 등록 또는 변경 시  (암호화 적용 전송, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, "2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
+|<sub>newPassword</sub>|<sub>N</sub>|<sub>192</sub>|<sub>신규 비밀번호(암호화)</sub>|<sub>비밀번호 최초 등록 또는 변경 시  (암호화 적용 전송, "2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 |<sub>Papers</sub>|<sub>N</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 인증 후 수신된 Papers</sub>|<sub></sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Passpoort Response Interface Layout
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>Papers</sub>|<sub>N</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Exchange API, Withdrawal Address API, Withdrawal API, Passport API에서 사용. Papers 생성 후 5분이후 해당 인증 소멸됨</sub>|<sub></sub>|
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Passport Required Option (PassportOption)
@@ -302,7 +302,7 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
     "merchantInformation.merchantSiteId" : "000001",
     "clientReferenceInformation.code" : "20220316192601000",
     "customerId" : "userid@usermail.url",
-    “Papers" : "77974df0c8be6a58264ec2df860af3a0ea7f63724bbd18194bf3ad636b31fac6",
+    "Papers" : "77974df0c8be6a58264ec2df860af3a0ea7f63724bbd18194bf3ad636b31fac6",
     "status" : "SUCCESS", 
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
    }
@@ -346,24 +346,24 @@ Exchange API, Passport API(비밀번호변경), Withdrawal Address API, API, Wit
 |<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>20220316192601001</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
-|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, "2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 |<sub>Papers</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 인증 후 수신된 Papers</sub>|<sub></sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Withdrawal Address Response Interface Layout
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>outAddress</sub>|<sub>N</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub></sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Withdrawal Address Sequence(Registration)
@@ -441,16 +441,16 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
 |<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>인출 요청 통화코드</sub>|<sub>SLAYB</sub>|
 |<sub>toCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>전환단위</sub>|<sub>인출 대상 통화코드</sub>|<sub>VGEO</sub>|
 |<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>인출 요청 토큰 수량</sub>|<sub>1</sub>|
-|<sub>sign</sub>|<sub></sub>|<sub></sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub></sub>|<sub></sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Withdrawal pre-trade Response Interface Layout
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
 |<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>인출 요청 통화코드</sub>|<sub>SLAYB</sub>|
@@ -465,7 +465,7 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Withdrawal pre-trade Sequence
@@ -500,12 +500,12 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
     "fromCurrency" : "SLAYB",
     "toCurrency" : "VEGO",
     "fromAmount" : "1", 
-    "withdrawalRate" : “100%”,
-    "toAmount" : “1”,
-    "withdrawalFee" : “0”,
-    "withdrawalAmount" : “1”,
-    "ReserveWID" : “d18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6f3a0ea7f63724bb”,
-    "pinNumber" : “880154”,
+    "withdrawalRate" : "100%",
+    "toAmount" : "1",
+    "withdrawalFee" : "0",
+    "withdrawalAmount" : "1",
+    "ReserveWID" : "d18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6f3a0ea7f63724bb",
+    "pinNumber" : "880154",
     "status" : "SUCCESS", 
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
    }
@@ -560,19 +560,19 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
 |<sub>withdrawalAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>인출수량</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 withdrawalAmount 값</sub>|<sub>1</sub>|
 |<sub>ReserveWID</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>인출검증 WID</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 ReserveWID 값</sub>|<sub></sub>|
 |<sub>pinNumber</sub>|<sub>Y</sub>|<sub>6</sub>|<sub>인출 PIN NUMBER</sub>|<sub>Withdrawal pre-trade API에서 수신 받은 pinNumber 값</sub>|<sub>854021</sub>|
-|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, “2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>outPassword</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>비밀번호(암호화)</sub>|<sub>비밀번호 (암호화 적용, "2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 |<sub>Papers</sub>|<sub>Y</sub>|<sub>192</sub>|<sub>거래검증 KEY</sub>|<sub>Passport API 호출 후 수신 받은 거래 검증 KEY</sub>|<sub></sub>|
-|<sub>notifyUrl</sub>|<sub>N</sub>|<sub>128</sub>|<sub>처리결과 수신 URL</sub>|<sub>비동기 처리결과를 수신 받을 URL (채널 측에서 블록체인 처리결과를 수신 처리하도록 개발 필요함)</sub>|<sub>https://Partners_URL/API/backNotify</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>notifyUrl</sub>|<sub>N</sub>|<sub>128</sub>|<sub>처리결과 수신 URL</sub>|<sub>비동기 처리결과를 수신 받을 URL (채널 측에서 블록체인 처리결과를 수신 처리하도록 개발 필요함)</sub>|<sub>Partners_URL<br>(Only HTTPS)</sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Withdrawal Response Interface Layout
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>거래소등에서 사용 가능한 채널 사용자의 퍼블릭 블록체인 주소</sub>|<sub></sub>|
 |<sub>fromCurrency</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>요청단위</sub>|<sub>인출 요청 통화코드</sub>|<sub>SLAYB</sub>|
@@ -586,7 +586,7 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Withdrawal Sequence
@@ -607,14 +607,14 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
     "fromCurrency" : "SLAYB",
     "toCurrency" : "VEGO",
     "fromAmount" : "1", 
-    "withdrawalRate" : “100%”,
-    "toAmount" : “1”,
-    "withdrawalFee" : “0”,
-    "withdrawalAmount" : “1”,
-    "ReserveWID" : “d18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6f3a0ea7f63724bb”,
-    "pinNumber" : “880154”,
-    “Papers" : "77974df0c8be6a58264ec2df860af3a0ea7f63724bbd18194bf3ad636b31fac6",
-    "notifyUrl" : "https://Partners_URL /API/backNotify"
+    "withdrawalRate" : "100%",
+    "toAmount" : "1",
+    "withdrawalFee" : "0",
+    "withdrawalAmount" : "1",
+    "ReserveWID" : "d18194bf3a77974df0c8be6a58264ec2df860ad636b31fac6f3a0ea7f63724bb",
+    "pinNumber" : "880154",
+    "Papers" : "77974df0c8be6a58264ec2df860af3a0ea7f63724bbd18194bf3ad636b31fac6",
+    "notifyUrl" : "https://Partners_URL/API/backNotify"
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
    }
 ```
@@ -630,10 +630,10 @@ Withdrawal pre-trade API는 Withdrawal API를 호출하기전 반드시 실행�
     "fromCurrency" : "SLAYB",
     "toCurrency" : "VEGO",
     "fromAmount" : "1", 
-    "withdrawalRate" : “100%”,
-    "toAmount" : “1”,
-    "withdrawalFee" : “0”,
-    "withdrawalAmount" : “1”,
+    "withdrawalRate" : "100%",
+    "toAmount" : "1",
+    "withdrawalFee" : "0",
+    "withdrawalAmount" : "1",
     "txId" : "0x7104afd5b61c5df952c8e9afd2dafa222d543111b2ee3862c80502b3f2aed93b ",
     "status" : "SUCCESS", 
     "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
@@ -679,29 +679,29 @@ Block Notify API는 Exchange API, Withdrawal API 등 블록체인 트랜잭션�
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|    
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>netDivision</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>네트워크 구분</sub>|<sub>블록체인 네트워크 구분</sub>|<sub>SLAYB, VGEO</sub>|
 |<sub>outAddress</sub>|<sub>Y</sub>|<sub>128</sub>|<sub>인출주소</sub>|<sub>내부주소(Exchange API) 또는 외부주소(Withdrawal API)</sub>|<sub></sub>|
 |<sub>txId</sub>|<sub>N</sub>|<sub>128</sub>|<sub>TXID</sub>|<sub>블록체인 Transaction ID</sub>|<sub></sub>|
 |<sub>status</sub>|<sub>Y</sub>|<sub>32</sub>|<sub>TXID 상태</sub>|<sub>블록체인 Transaction 상태</sub>|<sub>confirm</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Block Notify Request Interface Layout
 
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|    
-|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
-|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Respond the same as the requested value</sub>|
+|<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>merchantInformation.merchantSiteId</sub>|<sub>Y</sub>|<sub>30</sub>|<sub>채널하위번호</sub>|<sub>MW30P에서 할당된 하위채널 번호</sub>|<sub>Same as requested value</sub>|
+|<sub>clientReferenceInformation.code</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>거래번호</sub>|<sub>채널에서 생성하는 거래 유일값 (ex) System ID or Server ID+yyyMMdd+hhmmss+milisecond)</sub>|<sub>Same as requested value</sub>|
 |<sub>customerId</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>사용자 ID</sub>|<sub>전체 생태계에서 유일한 사용자 고유 ID(KEY)</sub>|<sub>userid@usermail.url</sub>|
 |<sub>status</sub>|<sub>Y</sub>|<sub>10</sub>|<sub>처리결과</sub>|<sub>성공(SUCCSS), 실패(DECLINED)</sub>|<sub>SUCCESS, DECLINED</sub>|
 |<sub>errorInformation.errCd</sub>|<sub>N</sub>|<sub>8</sub>|<sub>오류코드</sub>|<sub>성공일 경우 NULL, 오류일 경우 코드 확인</sub>|<sub>See Error Code</sub>|
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
-|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
+|<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 ("2. 보안적용 Guide" 참조)</sub>|<sub></sub>|
 <br>
 
 * Block Notify Sequence
