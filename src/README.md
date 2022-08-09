@@ -15,7 +15,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |-----|---------|------|------------|
 |Exchange Rate API|/api/ExRate.json|POST|application/json|
 
-[ Exchange Rate Inquiry Request Interface Layout ]
+* Exchange Rate Inquiry Request Interface Layout
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
 |<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>0000000000013</sub>|
@@ -26,7 +26,7 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>fromAmount</sub>|<sub>Y</sub>|<sub>20</sub>|<sub>요청수량</sub>|<sub>Item, Point, Token 수량 (환율등록 어드민에서 지정한 최소 단위 이하로 요청 시 오류 반환)</sub>|<sub>100</sub>|
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
 
-[ Exchange Rate Inquiry Response Interface Layout ]
+* Exchange Rate Inquiry Response Interface Layout
 | KEY |RQD|Len| Contents |Described|note|
 |-----|:-:|:-:| -------- |---------|----|
 |<sub>merchantInformation.merchantId</sub>|<sub>Y</sub>|<sub>50</sub>|<sub>채널번호</sub>|<sub>MW30P에서 할당된 채널 번호</sub>|<sub>Respond the same as the requested value</sub>|
@@ -42,13 +42,23 @@ Exchange Rate Inquiry API는 환율 정보를 제공합니다(Item, Point, etc �
 |<sub>errorInformation.reason</sub>|<sub>N</sub>|<sub>192</sub>|<sub>오류메시지</sub>|<sub>오류 발생시 해당 오류 메시지 </sub>|<sub>See Error Code</sub>|
 |<sub>sign</sub>|<sub>Y</sub>|<sub>64</sub>|<sub>서명검증 값</sub>|<sub>보안 서명 (“2. 보안적용 Guide” 참조)</sub>|<sub></sub>|
 
-[ Exchange Rate Inquiry Sequence ]
+* Exchange Rate Inquiry Sequence
 <img src="https://github.com/verseGEO/verseGEO.json.api-kr/blob/main/src/01SEQ-01.Exchange_Rate_Inquiry-KR.jpg">
 
-
+* Exchange Rate Inquiry Interface JSON Sample
 ```ruby
    puts "Hello World"
 ```
+```{
+  "merchantInformation.merchantId" : "000000000001",
+  "merchantInformation.merchantSiteId" : "000001",
+  "clientReferenceInformation.code" : "20220316192601000",
+  "fromCurrency" : "GOLD",
+  "toCurrency" : "SLAYB",
+  "fromAmount" : "100", 
+  "sign" : "DEDC93DB5CFE0F06CBB54B937266D378C27E2DE985E999B7F319666857E6C9EE"
+```}
+
 
 ## 2. Exchange Request API (제휴사 → verseGEO)
 
